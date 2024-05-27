@@ -88,10 +88,16 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               FlutterFlowDropDown<String>(
                 controller: _model.dropDownValueController ??=
                     FormFieldController<String>(
-                  _model.dropDownValue ??= '',
+                  _model.dropDownValue ??= 'MapType.normal',
                 ),
-                options: List<String>.from(['Option 1']),
-                optionLabels: const ['Option 1'],
+                options: List<String>.from([
+                  'MapType.normal',
+                  'MapType.satellite',
+                  'MapType.hybrid',
+                  'MapType.terrain',
+                  'MapType.none'
+                ]),
+                optionLabels: const ['طبيعي', 'ستالايت', 'hybrid', 'terrain', 'none'],
                 onChanged: (val) => setState(() => _model.dropDownValue = val),
                 width: 300.0,
                 height: 56.0,
