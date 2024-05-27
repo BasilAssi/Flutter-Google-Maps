@@ -1,6 +1,8 @@
+import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_google_map.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/form_field_controller.dart';
 import 'package:flutter/material.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
@@ -83,6 +85,37 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             padding: EdgeInsets.zero,
             scrollDirection: Axis.vertical,
             children: [
+              FlutterFlowDropDown<String>(
+                controller: _model.dropDownValueController ??=
+                    FormFieldController<String>(
+                  _model.dropDownValue ??= '',
+                ),
+                options: List<String>.from(['Option 1']),
+                optionLabels: const ['Option 1'],
+                onChanged: (val) => setState(() => _model.dropDownValue = val),
+                width: 300.0,
+                height: 56.0,
+                textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
+                      fontFamily: 'Manrope',
+                      letterSpacing: 0.0,
+                    ),
+                hintText: 'نوع الخريطة',
+                icon: Icon(
+                  Icons.keyboard_arrow_down_rounded,
+                  color: FlutterFlowTheme.of(context).secondaryText,
+                  size: 24.0,
+                ),
+                fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                elevation: 2.0,
+                borderColor: FlutterFlowTheme.of(context).alternate,
+                borderWidth: 2.0,
+                borderRadius: 8.0,
+                margin: const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 4.0),
+                hidesUnderline: true,
+                isOverButton: true,
+                isSearchable: false,
+                isMultiSelect: false,
+              ),
               Align(
                 alignment: const AlignmentDirectional(0.05, -1.1),
                 child: Container(
@@ -106,7 +139,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         onCameraIdle: (latLng) =>
                             setState(() => _model.googleMapsCenter = latLng),
                         initialLocation: _model.googleMapsCenter ??=
-                            const LatLng(13.106061, -59.613158),
+                            currentUserLocationValue!,
                         markers: [
                           if (googleMapMarker != null)
                             FlutterFlowMarker(
@@ -115,7 +148,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             ),
                         ],
                         markerColor: GoogleMarkerColor.violet,
-                        mapType: MapType.normal,
+                        mapType: MapType.hybrid,
                         style: GoogleMapStyle.standard,
                         initialZoom: 17.0,
                         allowInteraction: true,
